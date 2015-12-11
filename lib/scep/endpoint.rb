@@ -110,7 +110,7 @@ module SCEP
         response = self.class.post '/', { :query => { :operation => operation}, :body => message }.merge(default_options)
       else
         logger.debug "Executing GET ?operation=#{operation}&message=#{message}"
-        response = self.class.get '/', { :query => query }.merge(default_options)
+        response = self.class.get default_options[:base_uri], { :query => query }.merge(default_options)
       end
 
       if response.code != 200
