@@ -74,7 +74,7 @@ module SCEP
         reencrypted = request.proxy(raw_post, server.ra_certificate, verify_request).to_der
 
         # Forward to SCEP server
-        http_response_body = server.pki_operation(reencrypted, true)
+        http_response_body = server.pki_operation(reencrypted)
 
         # Decrypt response and re-encrypt for the device
         response = SCEP::PKIOperation::Response.new(ra_keypair)
