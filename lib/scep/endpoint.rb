@@ -107,7 +107,7 @@ module SCEP
       query[:message] = message unless message.nil?
       if is_post
         logger.debug "Executing POST ?operation=#{operation}"
-        response = self.class.post '/scep', { :query => { :operation => operation}, :body => message }.merge(default_options)
+        response = self.class.post '/scep', { :query => { :operation => operation, :message => message} }.merge(default_options)
       else
         logger.debug "Executing GET ?operation=#{operation}&message=#{message}"
         response = self.class.get '/scep', { :query => query }.merge(default_options)
