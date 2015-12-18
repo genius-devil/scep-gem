@@ -55,7 +55,7 @@ module SCEP
       #   in `raw_string`.
       def decrypt(raw_string, verify = true)
         p7raw = unsign_and_unencrypt_raw(raw_string, verify)
-        p7certs = OpenSSL::PKCS7.new(p7raw)
+        p7certs = OpenSSL::PKCS7.new(OpenSSL::PKCS7.new(raw_string).decrypt(ra_keypair.private_key,ra_keypair.certificate,OpenSSL::PKCS7::BINARY))
         @signed_certificates = p7certs.certificates
       end
 
